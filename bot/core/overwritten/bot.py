@@ -41,7 +41,7 @@ class Bot(AIOBot):
                             handler = import_module(path)
                             self.dp.include_router(handler.router)
 
-                            log.info(f"Модуль {handler.__name__} загружен.")
+                            log.info(f"router {handler.__name__} is loaded.")
                         except Exception as exp:
                             log.exception(exp)
                             continue
@@ -52,7 +52,7 @@ class Bot(AIOBot):
                     handler = import_module(path)
                     self.dp.include_router(handler.router)
 
-                    log.info(f"Модуль {handler.__name__} загружен.")
+                    log.info(f"router {handler.__name__} is loaded.")
                 except Exception as exp:
                     log.exception(exp)
                     continue                  
