@@ -1,4 +1,4 @@
-![Bot Banner](https://user-images.githubusercontent.com/79407681/215442268-21887ee0-e6f2-4aed-bdcf-a95f7607e74b.png)
+![Banner](https://user-images.githubusercontent.com/79407681/215442760-ee41ee81-ea16-4a27-a080-3c904c7e146c.png)
 
 
 TikTok Downloader Bot
