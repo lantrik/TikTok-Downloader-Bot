@@ -20,3 +20,25 @@ py -3 -m pip install -r requirements.txt
 ```
 
 <sup>if you do not install `requirements.txt`, then the bot may not start!</sup>
+
+Starting
+--------
+
+- First, you should obtain token for your bot from [BotFather](https://t.me/BotFather).
+- After you have to paste the bot token in the `config/privacy.py`.
+
+if the `privacy.py` file does not exist, you must create it in the `config` directory.
+<sup>The path to the file should be: `config/privacy.py`</sup>
+
+The file `privacy.py` must contain a class with a bot token.
+
+###Example
+
+```py
+
+
+class Privacy:
+    bot: str = "BOT_TOKEN"
+```
+
+- For the bot to work, you must run the `__main__.py`.
