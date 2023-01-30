@@ -1,36 +1,16 @@
 import os
 import requests
-from typing import Dict
-
 from bs4 import BeautifulSoup
 
 
-
 class VideoIsInvalid(Exception):
+    """Exception for invalid videos."""
     pass
-
-ServerUrl: str = "https://musicaldown.com/"
-PostUrl: str = f"{ServerUrl}id/download"
-
-Headers: Dict[str, str] = {
-    "Host": "musicaldown.com",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0",
-    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.5",
-    "DNT": "1",
-    "Upgrade-Insecure-Requests": "1",
-    "Sec-Fetch-Dest": "document",
-    "Sec-Fetch-Mode": "navigate",
-    "Sec-Fetch-Site": "none",
-    "Sec-Fetch-User": "?1",
-    "TE": "trailers"
-}
 
 class TikTok:
     """
     TikTok class.
-
-
+    
     Parameters
     ----------
     url: :class:`str`
@@ -38,24 +18,41 @@ class TikTok:
     """
     def __init__(self, url: str) -> None:
         self.url = url
+        self.headers = {
+            "Host": "musicaldown.com",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.5",
+            "DNT": "1",
+            "Upgrade-Insecure-Requests": "1",
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1",
+            "TE": "trailers"
+        }
+
+        self.server_url = "https://musicaldown.com/"
+        self.post_url = self.server_url + "id/download"
 
         self.session = requests.Session()
-        self.session.headers.update(Headers)
+        self.session.headers.update(self.headers)
 
-        self.request = self.session.get(ServerUrl)
+        self.request = self.session.get(self.server_url)
     
-    def download_video(self, filename: str) -> bytes:
+    def download_video(self, filename: str) -> str:
         """
         Video download method.
-
+        
         Parameters
         ----------
         filename: :class:`str`
             Specify filename.
-
+            
         Returns
         -------
-        :class:`bytes`
+        :class:`str`
+            Path to the downloaded file.
         """
         data = {}
 
@@ -69,13 +66,13 @@ class TikTok:
             else:
                 data[index.get("name")] = index.get("value")
         
-        request_post = self.session.post(PostUrl, data=data, allow_redirects=True)
+        request_post = self.session.post(self.post_url, data=data, allow_redirects=True)
 
         if request_post.status_code == 302 \
         or "This video is currently not available" in request_post.text \
         or "Video is private or removed!" in request_post.text \
         or "Submitted Url is Invalid, Try Again" in request_post.text:
-            raise VideoIsInvalid
+            raise VideoIsInvalid("Video is invalid!")
         
         get_all_blank = BeautifulSoup(request_post.text,"html.parser").findAll(
             "a", attrs={"target": "_blank"})
@@ -85,6 +82,5 @@ class TikTok:
 
         with open(filename, 'wb') as file:
             file.write(get_content.content)
-            file.close()
 
-            return os.path.join(filename)
+        return os.path.join(os.getcwd(), filename)
