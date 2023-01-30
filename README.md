@@ -42,7 +42,7 @@ class Privacy:
     bot: str = "BOT_TOKEN"
 ```
 
-- For the bot to work, you must run the `__main__.py`.
+- For the bot to work, you must run the `__main__.py` file.
 
 <br>
 <p align="center">
