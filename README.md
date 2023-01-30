@@ -9,7 +9,7 @@ This **bot** will help you download TikTok videos without watermark!
 Installing
 ----------
 
-**Python 3.7 or higher is required.**
+<sup>if you do not set `requirements.txt`, then the bot may not start!</sup>
 
 ``` sh
 # Linux/macOS
