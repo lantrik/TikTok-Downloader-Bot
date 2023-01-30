@@ -28,11 +28,12 @@ Starting
 - After you have to paste the bot token in the `config/privacy.py`.
 
 if the `privacy.py` file does not exist, you must create it in the `config` directory.
+
 <sup>The path to the file should be: `config/privacy.py`</sup>
 
 The file `privacy.py` must contain a class with a bot token.
 
-###Example
+### Example
 
 ```py
 
