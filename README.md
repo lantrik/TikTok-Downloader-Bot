@@ -43,3 +43,11 @@ class Privacy:
 ```
 
 - For the bot to work, you must run the `__main__.py`.
+
+<br>
+<p align="center">
+    <a href="https://t.me/lantrik">Contact me</a>
+    ⁕
+    <a href="https://t.me/lantrik">Bot Example</a>
+</p>
+<br>
