@@ -44,10 +44,6 @@ class TikTok:
 
         self.request = self.session.get(ServerUrl)
     
-    @property
-    def url(self) -> str:
-        return self.url
-    
     def download_video(self, filename: str) -> bytes:
         """
         Video download method.
