@@ -13,7 +13,7 @@ def cancel_keyboard() -> ReplyKeyboardMarkup:
     :class:`ReplyKeyboardMarkup`
     """
     keyboard_list: List[List[KeyboardButton]] = [
-        [KeyboardButton(text="Отменить")]
+        [KeyboardButton(text="Cancel")]
     ]
 
     keyboard: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
