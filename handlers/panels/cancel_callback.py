@@ -7,10 +7,11 @@ from bot.ext import keyboards
 from ..general import general_command
 
 
+
 router = Router(name="General Handler")
 
 @router.message(Command(commands=["cancel"]))
-@router.message(Text(text="Отменить"))
+@router.message(Text(text="Cancel"))
 async def cancel_command(message: Message, state: FSMContext) -> None:
     current_state = await state.get_state()
     if current_state is None:
@@ -18,6 +19,6 @@ async def cancel_command(message: Message, state: FSMContext) -> None:
     
     await state.clear()
     await message.answer(
-        "✅ Действие отменено",
+        "✅ Action canceled.",
         reply_markup=keyboards.KeyboardRemove(),
     )

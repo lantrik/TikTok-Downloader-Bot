@@ -16,15 +16,37 @@ from bot import __version__
 from config import Settings, Privacy
 
 
+
 log = getLogger()
 
 class Bot(AIOBot):
+    """
+    Bot class.
+
+    Raises
+    ------
+    TokenValidationError
+        When token has invalid format this exception will be raised.
+
+    Parameters
+    ----------
+    token: :class:`str`
+        Telegram Bot token `Obtained from @BotFather <https://t.me/BotFather>`.
+    """
     def __init__(self, token: str = Privacy.bot, **kwargs: Any) -> None:
         super().__init__(token, **kwargs)
 
         self.dp: Dispatcher = Dispatcher()
 
     def include_routers(self, directories: List[str] = Settings.directories) -> None:
+        """
+        Attach all routers.
+
+        Parameters
+        ----------
+        directories: List[:class:`str`]
+            Directory where routers are located
+        """
         for directory in directories:
             if directory.endswith("*"):
                 directory = directory.replace("*", "")
@@ -57,13 +79,13 @@ class Bot(AIOBot):
                     log.exception(exp)
                     continue                  
 
-    async def start(self, *args, **kwargs) -> None:
+    async def start(self, **kwargs) -> None:
         """
         Bot starting.
         """
         log.info("Connecting a bot...")
 
-        self.include_routers(*args, **kwargs)
+        self.include_routers(**kwargs)
 
         await self.delete_webhook(drop_pending_updates=True)
         await self.dp.start_polling(self)

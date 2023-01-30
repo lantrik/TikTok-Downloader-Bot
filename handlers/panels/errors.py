@@ -5,6 +5,7 @@ from aiogram.types import Message
 from aiogram.types.error_event import ErrorEvent
 
 
+
 router = Router(name="Error Handler")
 log = getLogger()
 

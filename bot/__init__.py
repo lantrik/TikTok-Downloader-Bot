@@ -39,7 +39,7 @@ __author__ = "lantrik"
 
 __license__ = "MIT"
 __copyright__ = "Copyright (c) 2022 lantrik"
-__version__ = "1.0.0c0"
+__version__ = "2.0.0f0"
 
 
 class VersionInfo(NamedTuple):
@@ -51,4 +51,4 @@ class VersionInfo(NamedTuple):
 
 
 version_info: VersionInfo = VersionInfo(
-    major=0, minor=1, micro=0, releaselevel="candidate", serial=0)
+    major=2, minor=0, micro=0, releaselevel="final", serial=0)

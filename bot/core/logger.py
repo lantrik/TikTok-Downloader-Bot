@@ -6,6 +6,9 @@ from config import Settings
 
 
 class Logger:
+    """
+    Base logging class.
+    """
     EXTERNAL_LOGS = ("aiogram", "dispatcher.py", "http", "client", "gateway", "base_events",)
     LOG_LEVEL = logging.DEBUG if Settings.debug else logging.INFO
 

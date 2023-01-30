@@ -5,6 +5,7 @@ from typing import Dict
 from bs4 import BeautifulSoup
 
 
+
 class VideoIsInvalid(Exception):
     pass
 
@@ -26,6 +27,15 @@ Headers: Dict[str, str] = {
 }
 
 class TikTok:
+    """
+    TikTok class.
+
+
+    Parameters
+    ----------
+    url: :class:`str`
+        TikTok video link.
+    """
     def __init__(self, url: str) -> None:
         self.url = url
 
@@ -33,8 +43,24 @@ class TikTok:
         self.session.headers.update(Headers)
 
         self.request = self.session.get(ServerUrl)
+    
+    @property
+    def url(self) -> str:
+        return self.url
+    
+    def download_video(self, filename: str) -> bytes:
+        """
+        Video download method.
 
-    def download_video(self, filename: str) -> None:
+        Parameters
+        ----------
+        filename: :class:`str`
+            Specify filename.
+
+        Returns
+        -------
+        :class:`bytes`
+        """
         data = {}
 
         parse = BeautifulSoup(self.request.text, "html.parser")
@@ -53,7 +79,6 @@ class TikTok:
         or "This video is currently not available" in request_post.text \
         or "Video is private or removed!" in request_post.text \
         or "Submitted Url is Invalid, Try Again" in request_post.text:
-
             raise VideoIsInvalid
         
         get_all_blank = BeautifulSoup(request_post.text,"html.parser").findAll(

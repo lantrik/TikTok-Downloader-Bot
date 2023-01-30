@@ -3,7 +3,15 @@ from typing import List
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
 
+
 def cancel_keyboard() -> ReplyKeyboardMarkup:
+    """
+    Undo button.
+
+    Returns
+    -------
+    :class:`ReplyKeyboardMarkup`
+    """
     keyboard_list: List[List[KeyboardButton]] = [
         [KeyboardButton(text="Отменить")]
     ]
